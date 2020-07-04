@@ -10,6 +10,7 @@
   --footer-adress-color: #ffffff;
   --goit-color: rgba(255, 255, 255, 0.4);
   --background-team-color: #f5f4fa;
+  --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 html {
@@ -65,6 +66,7 @@ body {
 }
 
 .text-nav .link {
+  position: relative;
   display: block;
   padding-top: 32px;
   padding-bottom: 32px;
@@ -74,6 +76,27 @@ body {
   font-size: 14px;
   line-height: 1.14;
   letter-spacing: 0.02em;
+
+  transition: color 250ms var(--timing-function);
+}
+
+.link.accent {
+  color: var(--link-color);
+}
+
+.text-nav .link.accent::after {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--link-color);
+
+  opacity: 1;
 }
 
 /* Контакты в шапке */
@@ -88,6 +111,8 @@ body {
   font-size: 14px;
   line-height: 1.14;
   letter-spacing: 0.02em;
+
+  transition: color 250ms var(--timing-function);
 }
 
 .text-contacts {
@@ -167,6 +192,15 @@ p {
 .button.secondary {
   background-color: var(--background-team-color);
   color: var(--primary-text-color);
+
+  transition: background-color 250ms var(--timing-function),
+    color 250ms var(--timing-function);
+}
+
+.button.secondary:hover,
+.button.secondary:focus {
+  background-color: var(--background-color);
+  color: var(--button-color);
 }
 
 .button.primary.header {
@@ -236,6 +270,8 @@ p {
   background: #ffffff;
   border: 1px solid #eeeeee;
   box-sizing: border-box;
+
+  overflow: hidden;
 }
 
 .portfolio .item:hover {
@@ -251,24 +287,29 @@ p {
   margin-top: 34px;
 }
 
-.product {
+.portfolio-card {
   position: relative;
+  overflow: hidden;
 }
 
-.product::before {
-  display: inline-block;
+.overlay {
   position: absolute;
+  bottom: 0;
+  left: 0;
 
-  content: "";
   width: 100%;
   height: 100%;
   background-color: rgba(33, 150, 243, 0.9);
 
-  opacity: 0;
+  /* opacity: 0; */
+
+  transform: translateY(100%);
+  transition: transform 250ms var(--timing-function);
 }
 
-.product:hover::before {
+.product:hover .overlay {
   opacity: 1;
+  transform: translateY(0);
 }
 
 .projects {
@@ -281,27 +322,32 @@ p {
   letter-spacing: 0.06em;
 }
 
-.view {
-  color: var(--paragraph-color);
-  font-size: 16px;
-  line-height: 1.87;
-}
-
 .about {
   position: absolute;
+  bottom: 0;
+  left: 0;
   top: 63px;
   left: 24px;
+  width: 322px;
+  height: 168px;
   margin-top: 4px;
 
   color: var(--footer-adress-color);
   font-size: 18px;
   line-height: 1.55;
 
-  opacity: 0;
+  /* opacity: 0; */
 }
 
-.about:hover {
+.portfolio-card:hover .about {
   opacity: 1;
+  transform: translateY(0);
+}
+
+.view {
+  color: var(--paragraph-color);
+  font-size: 16px;
+  line-height: 1.87;
 }
 
 /* Заголовки меньшие */
@@ -458,6 +504,8 @@ p {
   box-sizing: border-box;
   border-radius: 4px;
   background-size: contain;
+
+  transition: border 250ms var(--timing-function);
 }
 
 .clients .item + .item {
@@ -475,6 +523,8 @@ p {
 .logo5,
 .logo6 {
   fill: #afb1b8;
+
+  transition: fill 250ms var(--timing-function);
 }
 
 .logo1:hover,
@@ -583,6 +633,13 @@ p {
   width: 44px;
   height: 44px;
   background-color: #ffffff;
+
+  transition: background-color 250ms var(--timing-function);
+}
+
+.social-link:hover,
+.social-link:focus {
+  background-color: var(--link-color);
 }
 
 .social-link .icon-instagram,
@@ -590,10 +647,8 @@ p {
 .social-link .icon-facebook,
 .social-link .icon-linkedin {
   color: #afb1b8;
-}
 
-.social-link:hover {
-  background-color: var(--link-color);
+  transition: fill 250ms var(--timing-function);
 }
 
 .social-link .icon-instagram:hover,
@@ -620,9 +675,11 @@ p {
   width: 44px;
   height: 44px;
   background-color: rgba(255, 255, 255, 0.1);
+  transition: background-color 250ms var(--timing-function);
 }
 
-.footer-icon:hover {
+.footer-icon:hover,
+.footer-icon:focus {
   background-color: var(--link-color);
 }
 
